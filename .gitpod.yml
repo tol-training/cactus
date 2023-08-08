@@ -1,5 +1,11 @@
 image: gitpod/workspace-full-vnc
 
+tasks:
+  - command: |
+      cd
+      wget https://github.com/wtsi-hpag/PretextView/releases/download/0.2.5/PretextView_Linux-x86-64.zip
+      unzip PretextView_Linux-x86-64.zip
+
 ports:
   - port: 5900
     onOpen: ignore
