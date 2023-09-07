@@ -17,8 +17,6 @@ tasks:
   - name: Install Singularity 3.11.4
   # https://docs.sylabs.io/guides/3.0/user-guide/installation.html
     init: |
-      cd /workspace/treeval-curation/
-
       sudo apt-get update && sudo apt-get install -y \
       build-essential \
       libssl-dev \
@@ -52,24 +50,24 @@ tasks:
 
       nextflow self-update
 
-      gp sync-done nextflow
+      gp sync-await singularity
 
   - name: Install TreeVal Pipeline
   # https://github.com/sanger-tol/treeval
-    init: |
+    command: |
       cd /workspace/treeval-curation/
         
       git clone -b pre-tag https://github.com/sanger-tol/treeval.git
 
   - name: Install Curtation Pretext
   # https://github.com/sanger-tol/curationpretext
-    init: |
+    command: |
       cd /workspace/treeval-curation/
 
       git clone -b dev https://github.com/sanger-tol/curationpretext.git
 
   - name: Alias Nextflow
-    init: |
+    command: |
       cd /workspace/treeval-curation/
       
       echo "alias nextflow_cmd='/workspace/treeval-curation/nextflow'" >> ~/.bashrc
@@ -77,13 +75,13 @@ tasks:
       source ~/.bashrc
 
   - name: Download busco for nematode
-    init: |
+    command: |
       cd /workspace/treeval-curation/
 
       curl https://dp24.cog.sanger.ac.uk/Busco.tar.gz | tar xzf -
 
   - name: Download Nematode Test data and make synteny
-    init: |
+    command: |
       cd /workspace/treeval-curation/
 
       curl https://dp24.cog.sanger.ac.uk/Nematode.tar.gz | tar xzf -
@@ -93,42 +91,42 @@ tasks:
       cp /workspace/treeval-curation/Oscheius_DF5033/genomic_data/Oscheius_DF5033.fa /workspace/treeval-curation/synteny/nematode/SuperNematode.fa
 
   - name: Download Lepidoptera data
-    init: |
+    command: |
       cd /workspace/treeval-curation/
 
       curl https://dp24.cog.sanger.ac.uk/ilTorViri5.tar.gz | tar xzf -
 
   - name: Download Genomic Alignment data
-    init: |
+    command: |
       cd /workspace/treeval-curation/
 
       curl https://dp24.cog.sanger.ac.uk/AlignmentData.tar.gz | tar xzf -  
 
-  - name: Install HiGlass
-  # https://docs.higlass.io/tutorial.html
-    command: |
-      cd /workspace/treeval-curation/
-      
-      pip install higlass-manage
-
-      higlass-manage start
-  
   - name: Open Tutorial Page
     command: |
       gp preview https://bga23.org/treeval-curation/Tutorial/
 
-  - name: Install JBrowse2
-  # https://jbrowse.org/jb2/download/#jbrowse-cli-tools
-    command: |
-      cd /workspace/treeval-curation/
+  # - name: Install HiGlass
+  # # https://docs.higlass.io/tutorial.html
+  #   command: |
+  #     cd /workspace/treeval-curation/
       
-      npm install -g @jbrowse/cli
+  #     pip install higlass-manage
 
-      jbrowse create jbrowse2
+  #     higlass-manage start
+  
+  # - name: Install JBrowse2
+  # # https://jbrowse.org/jb2/download/#jbrowse-cli-tools
+  #   command: |
+  #     cd /workspace/treeval-curation/
+      
+  #     npm install -g @jbrowse/cli
 
-      cd jbrowse2/
+  #     jbrowse create jbrowse2
 
-      npx serve . -l 3000
+  #     cd jbrowse2/
+
+  #     npx serve . -l 3000
 
 
 
