@@ -38,6 +38,8 @@ tasks:
       ./mconfig && \
       make -C ./builddir && \
       sudo make -C ./builddir install
+
+      gp sync-done singularity
   
   - name: Install Nextflow
   # https://www.nextflow.io/docs/latest/getstarted.html
@@ -49,6 +51,8 @@ tasks:
       chmod +x nextflow
 
       nextflow self-update
+
+      gp sync-done nextflow
 
   - name: Install TreeVal Pipeline
   # https://github.com/sanger-tol/treeval
@@ -100,6 +104,19 @@ tasks:
 
       curl https://dp24.cog.sanger.ac.uk/AlignmentData.tar.gz | tar xzf -  
 
+  - name: Install HiGlass
+  # https://docs.higlass.io/tutorial.html
+    command: |
+      cd /workspace/treeval-curation/
+      
+      pip install higlass-manage
+
+      higlass-manage start
+  
+  - name: Open Tutorial Page
+    command: |
+      gp preview https://bga23.org/treeval-curation/Tutorial/
+
   - name: Install JBrowse2
   # https://jbrowse.org/jb2/download/#jbrowse-cli-tools
     command: |
@@ -113,18 +130,6 @@ tasks:
 
       npx serve . -l 3000
 
-  - name: Install HiGlass
-  # https://docs.higlass.io/tutorial.html
-    command: |
-      cd /workspace/treeval-curation/
-      
-      pip install higlass-manage
-
-      higlass-manage start
-  
-  - name: Open Tutorial Page
-    command: |
-      gp preview https://bga23.org/treeval-curation/Tutorial/
 
 
 github:
