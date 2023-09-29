@@ -2,7 +2,7 @@ image: gitpod/workspace-base
 
 tasks:
 - name: wget data and install mamba
-  init: |
+  command: |
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
     bash Mambaforge-$(uname)-$(uname -m).sh -b -p /workspace/conda && rm Mambaforge-$(uname)-$(uname -m).sh
     /workspace/conda/bin/mamba init bash
@@ -23,7 +23,6 @@ tasks:
     export CPLUS_INCLUDE_PATH=/workspace/conda/envs/cactus_env/include'
     export PATH=/workspace/cactus_install/cactus/bin:$PATH' >> ~/.bashrc
 
-  command: |
     /workspace/conda/bin/mamba init bash
     source ~/.bashrc
     conda activate cactus_env
@@ -35,19 +34,3 @@ vscode:
 
 workspaceLocation: "/workspace"
 
-github:
-  prebuilds:
-    # enable for the master/default branch (defaults to true)
-    master: true
-    # enable for all branches in this repo (defaults to false)
-    branches: true
-    # enable for pull requests coming from this repo (defaults to true)
-    pullRequests: true
-    # enable for pull requests coming from forks (defaults to false)
-    pullRequestsFromForks: true
-    # add a "Review in Gitpod" button as a comment to pull requests (defaults to true)
-    addComment: true
-    # add a "Review in Gitpod" button to pull requests (defaults to false)
-    addBadge: false
-    # add a label once the prebuild is ready to pull requests (defaults to false)
-    addLabel: prebuilt-in-gitpod
