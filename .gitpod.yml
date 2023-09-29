@@ -2,7 +2,7 @@ image: gitpod/workspace-base
 
 tasks:
 - name: wget data and install mamba
-  command: |
+  init: |
     cd /workspace
     # normally you would use the ensembl.org URL:
     # https://ftp.ensembl.org/pub/rapid-release/data_files/multi/hal_files/Coleoptera_36-way_20230217.hal
@@ -15,13 +15,26 @@ tasks:
     source ~/.bashrc
 
     mkdir -p /workspace/cactus_install && cd /workspace/cactus_install
-    mamba create -n cactus_env -c conda-forge gxx_linux-64 hdf5 pip zlib -y
+    mamba create -n cactus_env -c conda-forge gxx_linux-64 hdf5 pip zlib icu lxml -y
     mamba activate  cactus_env
     git clone https://github.com/ComparativeGenomicsToolkit/cactus.git --recursive
     cd cactus
     pip install -U -r ./toil-requirement.txt
-    # make -j 8
-        
+    export LD_LIBRARY_PATH=/workspace/conda/envs/cactus_env/lib/:$LD_LIBRARY_PATH
+    export C_INCLUDE_PATH=/workspace/conda/envs/cactus_env/include
+    export CPLUS_INCLUDE_PATH=/workspace/conda/envs/cactus_env/include
+    make -j 8
+    echo 'export LD_LIBRARY_PATH=/workspace/conda/envs/cactus_env/lib/:$LD_LIBRARY_PATH;
+    export C_INCLUDE_PATH=/workspace/conda/envs/cactus_env/include;
+    export CPLUS_INCLUDE_PATH=/workspace/conda/envs/cactus_env/include'
+    export PATH=/workspace/cactus_install/cactus/bin:$PATH' >> ~/.bashrc
+
+  command: |
+    /workspace/conda/bin/mamba init bash
+    source ~/.bashrc
+    conda activate cactus_env
+    
+
 vscode:
   extensions:
     - anwar.papyrus-pdf
