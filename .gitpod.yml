@@ -9,14 +9,13 @@ tasks:
     # But today, we put a copy on a different server because ensembl.org can sometimes have slow downloads
     curl -L -O https://sk13.cog.sanger.ac.uk/Coleoptera_36-way_20230217.hal
 
-  command: |
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
     bash Mambaforge-$(uname)-$(uname -m).sh -b -p /workspace/conda && rm Mambaforge-$(uname)-$(uname -m).sh
     /workspace/conda/bin/mamba init bash
     source ~/.bashrc
 
     mkdir -p /workspace/cactus_install && cd /workspace/cactus_install
-    conda create -n cactus_env -c conda-forge -c anaconda gxx_linux-64 hdf5 pip zlib -y
+    conda create -n cactus_env -c conda-forge gxx_linux-64 hdf5 pip zlib -y
     conda activate  cactus_env
     git clone https://github.com/ComparativeGenomicsToolkit/cactus.git --recursive
     cd cactus
