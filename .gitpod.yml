@@ -20,7 +20,7 @@ tasks:
     make -j 8
     echo 'export LD_LIBRARY_PATH=/workspace/conda/envs/cactus_env/lib/:$LD_LIBRARY_PATH;
     export C_INCLUDE_PATH=/workspace/conda/envs/cactus_env/include;
-    export CPLUS_INCLUDE_PATH=/workspace/conda/envs/cactus_env/include'
+    export CPLUS_INCLUDE_PATH=/workspace/conda/envs/cactus_env/include;
     export PATH=/workspace/cactus_install/cactus/bin:$PATH' >> ~/.bashrc
 
     /workspace/conda/bin/mamba init bash
