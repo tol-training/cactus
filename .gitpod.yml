@@ -15,10 +15,10 @@ tasks:
     /workspace/conda/bin/mamba init bash
     source ~/.bashrc
 
-    mkdir –p /workspace/cactus_install && cd /workspace/cactus_install
-    conda create -n cactus_env -c conda-forge –c anaconda gxx_linux-64 hdf5 pip -y
+    mkdir -p /workspace/cactus_install && cd /workspace/cactus_install
+    conda create -n cactus_env -c conda-forge -c anaconda gxx_linux-64 hdf5 pip zlib -y
     conda activate  cactus_env
-    git clone https://github.com/ComparativeGenomicsToolkit/cactus.git
+    git clone https://github.com/ComparativeGenomicsToolkit/cactus.git --recursive
     cd cactus
     pip install -U -r ./toil-requirement.txt
     make -j 8
