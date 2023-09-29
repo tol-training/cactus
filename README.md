@@ -1,6 +1,8 @@
 # commmands
 
 ```
+cd /workspace
+
 HAL=/workspace/Coleoptera_36-way_20230217.hal
 
 halValidate $HAL
