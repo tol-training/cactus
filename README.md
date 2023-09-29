@@ -4,6 +4,7 @@
 cd /workspace
 
 HAL=/workspace/Coleoptera_36-way_20230217.hal
+genome=Daphnia_pulex_gca021134715v1
 
 halValidate $HAL
 
@@ -13,7 +14,7 @@ halStats --tree $HAL> tree.nh
 
 halStats --root $HAL
 
-halStats --bedSequences genome=Daphnia_pulex_gca021134715v1 $HAL > $genome.bed
+halStats --bedSequences $genome $HAL > $genome.bed
 
 hal2fasta $HAL $genome --sequence 1 --length 1000000 > $genome.1.1000000.fa
 
