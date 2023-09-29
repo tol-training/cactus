@@ -20,7 +20,7 @@ tasks:
     git clone https://github.com/ComparativeGenomicsToolkit/cactus.git --recursive
     cd cactus
     pip install -U -r ./toil-requirement.txt
-    make -j 8
+    # make -j 8
         
 vscode:
   extensions:
