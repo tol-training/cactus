@@ -13,7 +13,7 @@ halStats --tree $HAL> tree.nh
 
 halStats --root $HAL
 
-halStats --bedSequences $genome $HAL > $genome.bed
+halStats --bedSequences genome=Daphnia_pulex_gca021134715v1 $HAL > $genome.bed
 
 hal2fasta $HAL $genome --sequence 1 --length 1000000 > $genome.1.1000000.fa
 
