@@ -3,12 +3,6 @@ image: gitpod/workspace-base
 tasks:
 - name: wget data and install mamba
   init: |
-    cd /workspace
-    # normally you would use the ensembl.org URL:
-    # https://ftp.ensembl.org/pub/rapid-release/data_files/multi/hal_files/Coleoptera_36-way_20230217.hal
-    # But today, we put a copy on a different server because ensembl.org can sometimes have slow downloads
-    # curl -L -O https://sk13.cog.sanger.ac.uk/Coleoptera_36-way_20230217.hal
-
     curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
     bash Mambaforge-$(uname)-$(uname -m).sh -b -p /workspace/conda && rm Mambaforge-$(uname)-$(uname -m).sh
     /workspace/conda/bin/mamba init bash
