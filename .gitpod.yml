@@ -2,7 +2,7 @@ image: gitpod/workspace-base
 
 tasks:
 - name: wget data and install mamba
-  init: |
+  command: |
     cd /workspace
     # normally you would use the ensembl.org URL:
     # https://ftp.ensembl.org/pub/rapid-release/data_files/multi/hal_files/Coleoptera_36-way_20230217.hal
